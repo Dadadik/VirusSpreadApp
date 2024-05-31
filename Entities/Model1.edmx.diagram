@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="d5a5c8a05d3f44e6855c97bfe510b0dd" Name="Diagram1">
+        <EntityTypeShape EntityType="VirusSpreadModel.BudgetAllocation" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="VirusSpreadModel.City" Width="1.5" PointX="0.75" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="VirusSpreadModel.PossibleStrategy" Width="1.25" PointX="5.25" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="VirusSpreadModel.sysdiagram" Width="1.5" PointX="2.75" PointY="4.75" IsExpanded="true" />
+        <AssociationConnector Association="VirusSpreadModel.FK_BudgetAllocation_City" ManuallyRouted="false" />
+        <AssociationConnector ManuallyRouted="true" Association="VirusSpreadModel.FK_BudgetAllocation_PossibleStrategy">
+          <ConnectorPoint PointX="5.25" PointY="1.8149092372284874" />
+          <ConnectorPoint PointX="4.5" PointY="1.7805017096068758" />
+        </AssociationConnector>
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

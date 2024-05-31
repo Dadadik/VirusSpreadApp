@@ -1,0 +1,38 @@
+﻿<Window x:Class="ViruseSpreadApp.Windows.AddOrEditCity"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ViruseSpreadApp.Windows"
+        mc:Ignorable="d"
+        Title="Добавление/Удаление города" WindowStartupLocation="CenterScreen" Style="{StaticResource base_window}" MinHeight="400" MinWidth="500" Height="400" Width="500" ResizeMode="NoResize">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="200"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="60"></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
+
+        </Grid.RowDefinitions>
+        <TextBlock Grid.Row="1" Text="Название города" Style="{StaticResource item_textblock}"/>
+        <TextBlock Grid.Row="2" Text="Население города" Style="{StaticResource item_textblock}"/>
+        <TextBlock Grid.Row="3" Text="Процент заболевших" Style="{StaticResource item_textblock}"/>
+        <TextBlock Grid.Row="4" Text="Процент вакцинированных" Style="{StaticResource item_textblock}"/>
+        <TextBlock Grid.Row="5" Text="Стоимость прививки" Style="{StaticResource item_textblock}"/>
+
+
+        <TextBox Grid.Row="1" Grid.Column="1" Width="250" Text="{Binding CityName}"/>
+        <TextBox x:Name="TbPopulation" Grid.Row="2" Grid.Column="1" Width="250" Text="{Binding Population}"/>
+        <TextBox x:Name="TbPercentInfected" Grid.Row="3" Grid.Column="1" Width="250" Text="{Binding PercentInfected}"/>
+        <TextBox x:Name="TbPercentVaccinated" Grid.Row="4" Grid.Column="1" Width="250" Text="{Binding PercentVaccinated}"/>
+        <TextBox x:Name="TbVaccinationPrice" Grid.Row="5" Grid.Column="1" Width="250" Text="{Binding VaccinationPrice}" />
+        <Button x:Name="BtnOk" Grid.Row="6" Grid.Column="1" HorizontalAlignment="Left" Width="70" Content="OK" Click="BtnOk_Click" />
+    </Grid>
+</Window>

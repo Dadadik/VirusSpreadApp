@@ -1,0 +1,251 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Хранилище VirusSpreadModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="BudgetAllocation">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CityId" Type="int" Nullable="false" />
+          <Property Name="PossibleStrategyId" Type="int" Nullable="false" />
+          <Property Name="Payment" Type="float" Nullable="false" />
+          <Property Name="DateTime" Type="date" Nullable="false" />
+        </EntityType>
+        <EntityType Name="City">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CityName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Population" Type="int" Nullable="false" />
+          <Property Name="PercentInfected" Type="int" Nullable="false" />
+          <Property Name="PercentVaccinated" Type="int" Nullable="false" />
+          <Property Name="VaccinationPrice" Type="float" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PossibleStrategy">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <Association Name="FK_BudgetAllocation_City">
+          <End Role="City" Type="Self.City" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="BudgetAllocation" Type="Self.BudgetAllocation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="City">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="BudgetAllocation">
+              <PropertyRef Name="CityId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BudgetAllocation_PossibleStrategy">
+          <End Role="PossibleStrategy" Type="Self.PossibleStrategy" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="BudgetAllocation" Type="Self.BudgetAllocation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PossibleStrategy">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="BudgetAllocation">
+              <PropertyRef Name="PossibleStrategyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище VirusSpreadModelContainer">
+          <EntitySet Name="BudgetAllocation" EntityType="Self.BudgetAllocation" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="City" EntityType="Self.City" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PossibleStrategy" EntityType="Self.PossibleStrategy" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_BudgetAllocation_City" Association="Self.FK_BudgetAllocation_City">
+            <End Role="City" EntitySet="City" />
+            <End Role="BudgetAllocation" EntitySet="BudgetAllocation" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BudgetAllocation_PossibleStrategy" Association="Self.FK_BudgetAllocation_PossibleStrategy">
+            <End Role="PossibleStrategy" EntitySet="PossibleStrategy" />
+            <End Role="BudgetAllocation" EntitySet="BudgetAllocation" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="VirusSpreadModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="BudgetAllocation">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CityId" Type="Int32" Nullable="false" />
+          <Property Name="PossibleStrategyId" Type="Int32" Nullable="false" />
+          <Property Name="Payment" Type="Double" Nullable="false" />
+          <Property Name="DateTime" Type="DateTime" Nullable="false" Precision="0" />
+          <NavigationProperty Name="City" Relationship="Self.FK_BudgetAllocation_City" FromRole="BudgetAllocation" ToRole="City" />
+          <NavigationProperty Name="PossibleStrategy" Relationship="Self.FK_BudgetAllocation_PossibleStrategy" FromRole="BudgetAllocation" ToRole="PossibleStrategy" />
+        </EntityType>
+        <EntityType Name="City">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CityName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Population" Type="Int32" Nullable="false" />
+          <Property Name="PercentInfected" Type="Int32" Nullable="false" />
+          <Property Name="PercentVaccinated" Type="Int32" Nullable="false" />
+          <Property Name="VaccinationPrice" Type="Double" Nullable="false" />
+          <NavigationProperty Name="BudgetAllocations" Relationship="Self.FK_BudgetAllocation_City" FromRole="City" ToRole="BudgetAllocation" />
+        </EntityType>
+        <EntityType Name="PossibleStrategy">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="BudgetAllocations" Relationship="Self.FK_BudgetAllocation_PossibleStrategy" FromRole="PossibleStrategy" ToRole="BudgetAllocation" />
+        </EntityType>
+        <EntityType Name="sysdiagram">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <Association Name="FK_BudgetAllocation_City">
+          <End Role="City" Type="Self.City" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="BudgetAllocation" Type="Self.BudgetAllocation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="City">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="BudgetAllocation">
+              <PropertyRef Name="CityId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BudgetAllocation_PossibleStrategy">
+          <End Type="Self.PossibleStrategy" Multiplicity="1" Role="PossibleStrategy">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="Self.BudgetAllocation" Multiplicity="*" Role="BudgetAllocation" />
+          <ReferentialConstraint>
+            <Principal Role="PossibleStrategy">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="BudgetAllocation">
+              <PropertyRef Name="PossibleStrategyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="VirusSpreadEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="BudgetAllocations" EntityType="Self.BudgetAllocation" />
+          <EntitySet Name="Cities" EntityType="Self.City" />
+          <EntitySet Name="PossibleStrategies" EntityType="Self.PossibleStrategy" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+          <AssociationSet Name="FK_BudgetAllocation_City" Association="Self.FK_BudgetAllocation_City">
+            <End Role="City" EntitySet="Cities" />
+            <End Role="BudgetAllocation" EntitySet="BudgetAllocations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BudgetAllocation_PossibleStrategy" Association="Self.FK_BudgetAllocation_PossibleStrategy">
+            <End EntitySet="PossibleStrategies" Role="PossibleStrategy" />
+            <End EntitySet="BudgetAllocations" Role="BudgetAllocation" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище VirusSpreadModelContainer" CdmEntityContainer="VirusSpreadEntities">
+          <EntitySetMapping Name="BudgetAllocations">
+            <EntityTypeMapping TypeName="VirusSpreadModel.BudgetAllocation">
+              <MappingFragment StoreEntitySet="BudgetAllocation">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="CityId" ColumnName="CityId" />
+                <ScalarProperty Name="PossibleStrategyId" ColumnName="PossibleStrategyId" />
+                <ScalarProperty Name="Payment" ColumnName="Payment" />
+                <ScalarProperty Name="DateTime" ColumnName="DateTime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Cities">
+            <EntityTypeMapping TypeName="VirusSpreadModel.City">
+              <MappingFragment StoreEntitySet="City">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="CityName" ColumnName="CityName" />
+                <ScalarProperty Name="Population" ColumnName="Population" />
+                <ScalarProperty Name="PercentInfected" ColumnName="PercentInfected" />
+                <ScalarProperty Name="PercentVaccinated" ColumnName="PercentVaccinated" />
+                <ScalarProperty Name="VaccinationPrice" ColumnName="VaccinationPrice" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PossibleStrategies">
+            <EntityTypeMapping TypeName="VirusSpreadModel.PossibleStrategy">
+              <MappingFragment StoreEntitySet="PossibleStrategy">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="VirusSpreadModel.sysdiagram">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
